@@ -9,3 +9,4 @@
 - refactor load_rivers so it does nit load direcrly
 - anything else on task list
 - test all notebooks (paths may be wrong)
+- convert tables to the units used in the paper
