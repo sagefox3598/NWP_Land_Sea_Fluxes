@@ -1,20 +1,15 @@
 import pandas as pd
 import numpy as np
 import os
-
+from pathlib import Path
 
 pwd = os.getcwd().split("/")
 
-try:
-    wq_path = os.environ["WQ_PATH"]
-    flow_path = os.environ["FLOW_DATA_PATH"]
-except KeyError:
-    # this module could be called from anywhere, so it has to figure out the river data path
-    #River_Data_path = "/".join(pwd[:pwd.index("Research")]) + "/Research/data/River_Data.xlsx"
-    wq_path = "../data/wq_uncen_all.xlsx"
-    flow_path = "../data/Downstream_Estimate_All_Rivers_rolling60.csv"
+data_path = Path.cwd().parent/"data"
+wq_path = os.getenv("WQ_PATH", data_path/"wq_uncen_all.xlsx")
+flow_path = os.getenv("FLOW_DATA_PATH", data_path/"Downstream_Estimate_All_Rivers_rolling60.csv")
 
-area_path = "../data/watershed_area_stats.csv"
+area_path = data_path/"watershed_area_stats.csv"
 area_df = pd.read_csv(area_path)
 
 rivers = ["Puelo", "Yelcho", "Palena", "Cisnes", "Aysen"]
