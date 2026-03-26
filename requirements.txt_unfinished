@@ -8,6 +8,8 @@ xlrd?
 openpyxl
 rpy2
 notebook
+netcdf4
+h5netcdf
 standard library
 
 
