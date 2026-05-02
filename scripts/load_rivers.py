@@ -116,7 +116,12 @@ for df in raw_chem_dfs.values():
 
 
 # The only one with replicates is Cisnes, so we'll just fix that real quick.
-Cisnes_Chem_raw = Cisnes_Chem_raw.groupby("Date").agg(lambda x: np.sum(x.astype("str")) if x.dtype=="object" else np.mean(x))
+Cisnes_Chem_raw = Cisnes_Chem_raw.groupby("Date").agg(
+    lambda x: (
+        np.mean(x) if pd.api.types.is_numeric_dtype(x.dtype)
+        else np.sum(x.astype("str"))
+    )
+)
 #Cisnes_Chem_raw[:, Cisnes_Chem_raw.dtypes != "object"]
 raw_chem_dfs["Cisnes"] = Cisnes_Chem_raw
 
